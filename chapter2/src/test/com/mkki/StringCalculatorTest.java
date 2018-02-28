@@ -34,6 +34,12 @@ public class StringCalculatorTest {
     }
 
     @Test
+    public void split(){
+        assertArrayEquals(new String[] {"1"}, "1".split(","));
+        assertArrayEquals(new String[] {"1", "2"}, "1,2".split(","));
+    }
+
+    @Test
     public void addNumsWithCustomSepr(){
         assertEquals(6, stringCalculator.add("//;\n1;2;3"));
     }

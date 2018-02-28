@@ -4,42 +4,51 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringCalculator {
-    public int add(String text){
-        if(text == null || text.isEmpty()) {
+    public int add(String text) {
+        if (isBlank(text)) {
             return 0;
         }
 
-        if(text.contains(",") || text.contains(":")) {
-            String[] tokens = text.split(",|:");
+        return sum(toInts(split(text)));
+    }
 
-            int sum = 0;
-            for (String str : tokens) {
-                if(Integer.parseInt(str) < 0){
-                    throw new RuntimeException();
-                }
-                sum += Integer.parseInt(str);
-            }
-
-            return sum;
-        }
-
+    public String[] split(String text){
         Matcher m = Pattern.compile("//(.)\n(.*)").matcher(text);
-
         if(m.find()){
-            String customDelimeter = m.group(1);
-            String[] tokens = m.group(2).split(customDelimeter);
-
-            int sum = 0;
-            for (String str : tokens) {
-                if(Integer.parseInt(str) < 0){
-                    throw new RuntimeException();
-                }
-                sum += Integer.parseInt(str);
-            }
-
-            return sum;
+            return m.group(2).split(m.group(1));
         }
 
-        return Integer.parseInt(text);
+        return text.split(",|:");
+    }
+
+    public boolean isBlank(String text){
+        return text == null || text.isEmpty();
+    }
+
+    public int[] toInts(String[] values){
+        int[] numbers = new int[values.length];
+        for(int i=0; i<values.length; i++){
+            numbers[i] = toPositive(values[i]);
+        }
+
+        return numbers;
+    }
+
+    public int toPositive(String value){
+        int number = Integer.parseInt(value);
+        if(number < 0){
+            throw new RuntimeException();
+        }
+
+        return number;
+    }
+
+    public int sum(int[] numbers){
+        int sum = 0;
+        for (int number : numbers) {
+            sum += number;
+        }
+
+        return sum;
     }
 }

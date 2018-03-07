@@ -1,2 +1,3 @@
 util\HttpRequestUtilsTest.class
 util\IOUtilsTest.class
+webserver\RequestHandlerTest.class

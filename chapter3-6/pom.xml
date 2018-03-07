@@ -2,7 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.nhnnext</groupId>
-	<artifactId>web-application-server</artifactId>
+	<artifactId>chapter3-6</artifactId>
 	<version>1.0</version>
 	<packaging>jar</packaging>
 
@@ -35,7 +35,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>web-application-server</finalName>
+		<finalName>chapter3-6</finalName>
 		<sourceDirectory>src/main/java</sourceDirectory>
 		<testSourceDirectory>src/test/java</testSourceDirectory>
 		<testOutputDirectory>target/test-classes</testOutputDirectory>

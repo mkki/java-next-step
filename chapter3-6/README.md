@@ -1,7 +1,7 @@
-# 요구사항
 이 저장소는 박재성님의 저서인 **자바 웹 프로그래밍 NEXT STEP** [예제 코드][https://github.com/slipp/web-application-server]의
 구현 코드를 포함하고 있습니다.
 
+# 요구사항
 ### 요구사항 1 - http://localhost:8080/index.html로 접속시 응답
 * 응답 본문에 출력 스트림으로 `./webapp/index.html`을 추가하여 보낸다.
 * `InputStreamReader`는 보조 스트림으로 파라미터로 사용된 바이트 기반 노드 스트림인 `inputStream`을
@@ -40,3 +40,14 @@
 ### 요구사항 7 - stylesheet 적용
 * 기존 애플리케이션은 모든 컨텐츠를 `text/html` 타입으로 보내서 `CSS` 파일이 동작하지 않았다.
 * 요청 라인 URL이 `.css`로 끝나면 `Content-Type` 헤더 값을 `text/css`로 바꾸어 응답한다.
+
+# 리팩토링
+리팩토링에서 중요한 점은 로직의 복잡도를 최대한 줄이는 것이다. 
+생성한 객체를 최대한 사용하고, 복잡도와 책임이 늘어날 때 새로운 객체를 추가하는 연습이 필요하다.
+
+
+### 요구사항 1. 요청과 응답 데이터 처리 로직을 별도의 클래스로 분리
+* 요청 데이터를 담고 있는 `InputStream`을 생성자로 받아 메서드, URL, 헤더, 본문을 분리하는
+`HttpRequest` 클래스를 만든다.
+* 요청 라인을 처리하는 `processRequestLine()` 메서드를 `RequestLine` 클래스로 분리하여 복잡도를 줄인다.
+* 

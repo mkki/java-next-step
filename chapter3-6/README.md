@@ -45,9 +45,17 @@
 리팩토링에서 중요한 점은 로직의 복잡도를 최대한 줄이는 것이다. 
 생성한 객체를 최대한 사용하고, 복잡도와 책임이 늘어날 때 새로운 객체를 추가하는 연습이 필요하다.
 
-
 ### 요구사항 1. 요청과 응답 데이터 처리 로직을 별도의 클래스로 분리
+1. 요청 로직 분리
 * 요청 데이터를 담고 있는 `InputStream`을 생성자로 받아 메서드, URL, 헤더, 본문을 분리하는
 `HttpRequest` 클래스를 만든다.
 * 요청 라인을 처리하는 `processRequestLine()` 메서드를 `RequestLine` 클래스로 분리하여 복잡도를 줄인다.
-* 
+* `GET`, `POST` 상수 값을 `enum`으로 리팩토링 한다.
+> 독립적인 상수 값이 아닌 연관성을 가지는 상수는 enum을 사용하기 적합하다.  
+* 이동욱님의 [Java Enum 활용기][http://woowabros.github.io/tools/2017/07/10/java-enum-uses.html]에서
+보다 많은 예시를 학습할 수 있었다.
+
+2. 응답 로직 분리
+* `RequestHandler` 클래스의 응답 데이터 처리 중복을 줄이고자 `HttpResponse` 클래스를 생성해 응답 데이터 처리를 위임한다.
+* `HTML`, `CSS`, `JavaScript` 파일을 직접 읽어 처리하는 `forward()` 메서드, 특정 URL로 리다이렉트하는 `sendRedirect()` 메서드를 구현한다.
+* 응답 헤더 정보는 `Map<String, String> headers`에 저장되며, `processHeaders()` 메서드로 출력스트림에 적용시킨다.

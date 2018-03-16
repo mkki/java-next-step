@@ -66,8 +66,7 @@
 > 이는 OCP 원칙을 위반하고 있다. OCP(Open-Closed Principle, 개방폐쇄의 원칙)란,
 요구사항의 변경이나 추가사항이 발생하더라도 기본 구성요소의 수정이 일어나지 않고, 쉽게 확장 가능해야 한다는 객체지향 설계 원칙이다.
 * 각 메서드 구현부는 동일한 인자를 받기에 **인터페이스**로 추출할 수 있다.
-* `Controller` 인터페이스를 구현하는 클래스들은 
+* `Controller` 인터페이스를 구현하는 클래스들은 `RequestHandler` 클래스로부터 요청 URl 분기 처리를 위임 받는다.
 * `RequestMapping` 클래스는 모든 URL과 Controller를 관리하며 요청 URL에 Controller를 반환한다.
 이는 `RequestHandler`가 요청 URL에 대한 Contorller를 찾은 후의 작업을 해당 Controller가 처리하도록 하게 해준다.
 * 마지막으로 **추상클래스**인 `AbstractController` 추가하여 `GET`, `POST` 메서드에 따라 다른 처리를 할 수 있도록 한다.
-

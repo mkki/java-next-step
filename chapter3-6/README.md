@@ -1,5 +1,5 @@
 # 요구사항
-이 저장소는 박재성님의 저서인 **자바 웹 프로그래밍 NEXT STEP** [예제 코드][https://github.com/slipp/web-application-server]의
+이 저장소는 박재성님의 저서인 **자바 웹 프로그래밍 NEXT STEP** [예제 코드](https://github.com/slipp/web-application-server)의
 구현 코드를 포함하고 있습니다.
 
 ### 요구사항 1 - http://localhost:8080/index.html로 접속시 응답

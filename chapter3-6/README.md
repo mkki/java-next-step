@@ -1,4 +1,4 @@
-이 저장소는 박재성님의 저서인 **자바 웹 프로그래밍 NEXT STEP** [예제 코드][https://github.com/slipp/web-application-server]의
+이 저장소는 박재성님의 저서인 **자바 웹 프로그래밍 NEXT STEP** [예제 코드](https://github.com/slipp/web-application-server)의
 구현 코드를 포함하고 있습니다.
 
 # 요구사항
@@ -52,10 +52,22 @@
 * 요청 라인을 처리하는 `processRequestLine()` 메서드를 `RequestLine` 클래스로 분리하여 복잡도를 줄인다.
 * `GET`, `POST` 상수 값을 `enum`으로 리팩토링 한다.
 > 독립적인 상수 값이 아닌 연관성을 가지는 상수는 enum을 사용하기 적합하다.  
-* 이동욱님의 [Java Enum 활용기][http://woowabros.github.io/tools/2017/07/10/java-enum-uses.html]에서
+* 이동욱님의 [Java Enum 활용기](http://woowabros.github.io/tools/2017/07/10/java-enum-uses.html)에서
 보다 많은 예시를 학습할 수 있었다.
 
 2. 응답 로직 분리
 * `RequestHandler` 클래스의 응답 데이터 처리 중복을 줄이고자 `HttpResponse` 클래스를 생성해 응답 데이터 처리를 위임한다.
 * `HTML`, `CSS`, `JavaScript` 파일을 직접 읽어 처리하는 `forward()` 메서드, 특정 URL로 리다이렉트하는 `sendRedirect()` 메서드를 구현한다.
 * 응답 헤더 정보는 `Map<String, String> headers`에 저장되며, `processHeaders()` 메서드로 출력스트림에 적용시킨다.
+
+
+3. 다형성을 활용하여 클라이언트 요청 URL 분기 처리 제거
+* `RequestHandler` 클래스의 `run()` 메서드의 복잡도를 줄이고자 각 분기문 구현을 별도의 메서드로 분리한다.
+> 이는 OCP 원칙을 위반하고 있다. OCP(Open-Closed Principle, 개방폐쇄의 원칙)란,
+요구사항의 변경이나 추가사항이 발생하더라도 기본 구성요소의 수정이 일어나지 않고, 쉽게 확장 가능해야 한다는 객체지향 설계 원칙이다.
+* 각 메서드 구현부는 동일한 인자를 받기에 **인터페이스**로 추출할 수 있다.
+* `Controller` 인터페이스를 구현하는 클래스들은 
+* `RequestMapping` 클래스는 모든 URL과 Controller를 관리하며 요청 URL에 Controller를 반환한다.
+이는 `RequestHandler`가 요청 URL에 대한 Contorller를 찾은 후의 작업을 해당 Controller가 처리하도록 하게 해준다.
+* 마지막으로 **추상클래스**인 `AbstractController` 추가하여 `GET`, `POST` 메서드에 따라 다른 처리를 할 수 있도록 한다.
+

@@ -2,7 +2,6 @@
 구현 코드를 포함하고 있습니다.
 
 # Servlet/JSP, Servlet Container를 활용한 동적 웹 애플리케이션 개발
-## 이론
 * `Servlet`이란, 앞서 **chapter3-6**에서 구현한 웹 서버의 `Controller`, `HttpServletRequest`, `HttpServletResponse`를 추상화한 인터페이스 표준이다.
 다시 말해, `HTTP`의 클라이언트 요청과 응답에 대한 표준을 정해놓은 것이다.
 * `Servlet Container`는 이 서블릿 표준에 대한 **구현**을 담당하고 있으며, 앞서 구현한 웹 서버가 이 역할을 한다고 볼 수 있다.

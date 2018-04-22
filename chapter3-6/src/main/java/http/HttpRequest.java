@@ -50,13 +50,12 @@ public class HttpRequest{
 
     }
 
-    public boolean isLogin(){
-        Map<String, String> cookies = HttpRequestUtils.parseCookies(headers.get("Cookie"));
-        String value = cookies.get("logined");
-        if(value == null){
-            return false;
-        }
-        return Boolean.parseBoolean(value);
+    public HttpSession getSession(){
+        return HttpSessions.getSession(getCookies().getCookie("JSESSIONID"));
+    }
+
+    public HttpCookie getCookies() {
+        return new HttpCookie(getHeader("Cookie"));
     }
 
     public HttpMethod getMethod(){
